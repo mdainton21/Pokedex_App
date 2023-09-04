@@ -1,1 +1,6 @@
-/* This will be something... eventually */
+:root {
+    --page-padding: 20px;
+}
+body {
+    padding: var(--page-padding);
+}
