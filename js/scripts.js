@@ -39,15 +39,16 @@ pokemonlist = [
 ]
 
 // Loop to print pokemon name/height
-for (let i = 0; i < pokemonlist.length; i++) {
-    document.write(pokemonlist[i].name);
-    document.write(' (height: ' + pokemonlist[i].height + 'm)');
-    document.write(' (weight: ' + pokemonlist[i].weight + 'kg)');
+pokemonlist.forEach(function (item) {
+    document.write(item.name);
+    document.write(' (height: ' + item.height + 'm)');
+    document.write(' (weight: ' + item.weight + 'kg)');
     // Conditional to check height and weight
-    if (pokemonlist[i].height > 1) {
+    if (item.height > 1) {
         document.write(' - That is pretty tall!');
-    } else if (pokemonlist[i].weight > 20) {
+    }
+    else if (item.weight > 20) {
         document.write(' - That is quite heavy!')
     }
     document.write('<br><br>')
-}
+});
