@@ -4,3 +4,33 @@
 body {
     padding: var(--page-padding);
 }
+
+h1 {
+    padding: 0px 54px;
+}
+
+.button-class {
+    background-color: #E3350D;
+    border: 2px solid;
+    border-radius: 8px;
+    color: white;
+    height: 60px;
+    width: 150px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.3s;
+}
+
+.button-class:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid Red;
+}
+ul {
+    list-style-type: none;
+  }

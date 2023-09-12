@@ -1,5 +1,6 @@
+// IIFE wrapping
 let pokemonRepository = (function () {
-    let pokemonList = [
+    let Repository = [
         {
             name: 'Bulbasaur',
             height: 0.7,
@@ -39,15 +40,40 @@ let pokemonRepository = (function () {
     ]
 
     function getAll() {
-        return pokemonList;
+        return Repository;
     }
     function add(pokemon) {
-        pokemonList.push(pokemon);
+        Repository.push(pokemon);
     }
 
+    // Function to add Pokemon as List items
+    function addListItem(pokemon) {
+        let pokemonQuery = document.querySelector(".pokemon-list");
+        let pokemonItem = document.createElement("li");
+        let button = document.createElement("button");
+        button.innerText = pokemon.name;
+        button.classList.add("button-class");
+
+        // Add event listener to call details function whenever a button is clicked
+        button.addEventListener('click', function (pokemonClick) {
+            pokemonRepository.showDetails(pokemon);
+        });
+
+        //Appends
+        pokemonItem.appendChild(button);
+        pokemonQuery.appendChild(pokemonItem);
+    }
+
+    function showDetails(pokemon) {
+        console.log(pokemon.name);
+    }
+
+    // return all functions created in IIFE wrapping
     return {
         getAll: getAll,
-        add: add
+        add: add,
+        addListItem: addListItem,
+        showDetails: showDetails
     };
 })();
 
@@ -55,17 +81,7 @@ let pokemonRepository = (function () {
 console.log(pokemonRepository.getAll());
 pokemonRepository.add({ name: 'Blastoise' });
 
-// Loop to print pokemon name/height
-pokemonRepository.getAll().forEach(function (item) {
-    document.write(item.name);
-    document.write(' (height: ' + item.height + 'm)');
-    document.write(' (weight: ' + item.weight + 'kg)');
-    // Conditional to check height and weight
-    if (item.height > 1) {
-        document.write(' - That is pretty tall!');
-    }
-    else if (item.weight > 20) {
-        document.write(' - That is quite heavy!')
-    }
-    document.write('<br><br>')
+// Calling List function
+pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
 });
