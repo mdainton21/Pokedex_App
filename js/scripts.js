@@ -1,49 +1,21 @@
 // IIFE wrapping
 let pokemonRepository = (function () {
-    let Repository = [
-        {
-            name: 'Bulbasaur',
-            height: 0.7,
-            weight: 6.9,
-            type: ['grass', 'poison'],
-        },
-        {
-            name: 'Ivysaur',
-            height: 1,
-            weight: 13,
-            type: ['grass', 'poison'],
-        },
-        {
-            name: 'Charmander',
-            height: 0.6,
-            weight: 8.5,
-            type: ['fire'],
-        },
-        {
-            name: 'Charmeleon',
-            height: 1.1,
-            weight: 19,
-            type: ['fire'],
-        },
-        {
-            name: 'Squirtle',
-            height: 0.5,
-            weight: 9,
-            type: ['water'],
-        },
-        {
-            name: 'Wartortle',
-            height: 1,
-            weight: 22.5,
-            type: ['water'],
-        }
-    ]
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
 
-    function getAll() {
-        return Repository;
-    }
     function add(pokemon) {
-        Repository.push(pokemon);
+        // data check before push
+        if (
+            typeof pokemon === "object" &&
+            "name" in pokemon
+        ) {
+            pokemonList.push(pokemon);
+        } else {
+            console.log("pokemon data error");
+        }
+    }
+    function getAll() {
+        return pokemonList;
     }
 
     // Function to add Pokemon as List items
@@ -54,9 +26,9 @@ let pokemonRepository = (function () {
         button.innerText = pokemon.name;
         button.classList.add("button-class");
 
-        // Add event listener to call details function whenever a button is clicked
-        button.addEventListener('click', function (pokemonClick) {
-            pokemonRepository.showDetails(pokemon);
+        // Event listener. Activates the showDetails function upon pokemon name click
+        button.addEventListener("click", function (event) {
+            showDetails(pokemon);
         });
 
         //Appends
@@ -64,8 +36,42 @@ let pokemonRepository = (function () {
         pokemonQuery.appendChild(pokemonItem);
     }
 
+    // Function to fetch PokeAPI and save to list
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            // Load specific details for each pokemon
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function (e) {
+            console.error(e);
+        });
+    }
+
+    // Writes details of pokemon to the console
     function showDetails(pokemon) {
-        console.log(pokemon.name);
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
     }
 
     // return all functions created in IIFE wrapping
@@ -73,15 +79,16 @@ let pokemonRepository = (function () {
         getAll: getAll,
         add: add,
         addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails,
         showDetails: showDetails
     };
 })();
 
-// IIFE check
-console.log(pokemonRepository.getAll());
-pokemonRepository.add({ name: 'Blastoise' });
 
 // Calling List function
-pokemonRepository.getAll().forEach(function (pokemon) {
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+    pokemonRepository.getAll().forEach(function (pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
