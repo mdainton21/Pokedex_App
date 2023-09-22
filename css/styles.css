@@ -1,6 +1,7 @@
 :root {
     --page-padding: 20px;
 }
+
 body {
     padding: var(--page-padding);
 }
@@ -10,17 +11,18 @@ h1 {
 }
 
 .button-class {
-    background-color: #E3350D;
+    background-color: #b90000;
     border: 2px solid;
     border-radius: 8px;
     color: white;
-    height: 60px;
-    width: 150px;
+    height: 120px;
+    width: 240px;
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
+    text-transform: capitalize;
     display: inline-block;
-    font-size: 16px;
+    font-size: 32px;
     margin: 4px 2px;
     transition-duration: 0.3s;
 }
@@ -31,6 +33,78 @@ h1 {
     color: black;
     border: 2px solid Red;
 }
+img:hover {
+    cursor: pointer;
+}
+
 ul {
     list-style-type: none;
+    
+}
+
+li {
+    padding: 10px;
+    display: inline;
+}
+
+#modal-container {
+    display: none;
+}
+
+#modal-container.is-visible {
+    position: fixed;
+    padding: 20px;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    
+    /* to show it above other content */
+    z-index: 999; 
+    
+    /* to allow scrolling if the screen is not high enough*/
+    overflow: auto; 
+    
+    /* this is used to center the modal */
+    display: grid;
+    text-align: center;
   }
+  
+  .modal {
+    margin: auto;
+    display: inline-block;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 15px;
+    width: 100%;
+    max-width: 700px;
+    text-align: left;
+  }
+
+  .modal img {
+    float: left;
+    max-width: 200px;
+    max-height: 200px;
+    width: 100%;
+}
+  
+  .modal-close {
+    float: right;
+    border: 0;
+    background: none;
+    color: #777;
+    text-decoration: underline;
+  }
+  
+  .modal h1 {
+    text-transform: capitalize;
+    margin-top: 0;
+  }
+  
+  .modal p {
+    margin-bottom: 0;
+    padding: 3px;
+  }
+  
