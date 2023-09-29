@@ -4,15 +4,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <title>Simple JS App</title>
 </head>
 
 <body>
-  <h1>Pokédex</h1>
-  <ul class="pokemon-list">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+     <img src="img/pokeball.svg" width="30" height="30" class="d-inline-block align-top" id="pokeball_logo" alt="pokeball image">
+      Pokédex
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gen I</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gen II</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Gen III</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <ul class="pokemon-list list-group">
 
   </ul>
   <div id="modal-container">
@@ -22,6 +44,12 @@
       <p>Modal text</p>        
     </div> -->
   </div>
+
+  <!-- Bootstrap Setup-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+  <!--Polyfill setup-->
   <script src="js/promise-polyfill.js"></script>
   <script src="js/fetch-polyfill.js"></script>
   <script src="js/scripts.js"></script>
